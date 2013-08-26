@@ -59,12 +59,12 @@ module Fluent
 
     private
     def parse_payload(msg)
-      ret = { payload: msg[:payload] }
+      ret = { payload: msg }
       
       begin
         case @payload_format
         when "json"
-          ret = JSON.parse(msg[:payload])
+          ret = JSON.parse(msg)
         end
       rescue => e
         # should raises a error to ovserver?
