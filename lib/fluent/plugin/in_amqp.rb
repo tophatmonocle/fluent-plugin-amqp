@@ -51,7 +51,7 @@ module Fluent
       @bunny.start
       q = @bunny.queue(@queue, :passive => @passive, :durable => @durable,
                        :exclusive => @exclusive, :auto_delete => @auto_delete)
-      q.subscribe do |msg|
+      q.subscribe do |delivery_info, metadata, msg|
         payload = parse_payload(msg)
         Engine.emit(@tag, Time.new.to_i, payload)
       end
